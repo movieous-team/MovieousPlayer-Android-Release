@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MovieousPlayerDemo</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="pls_choose_videopath">播放地址:</string>
+    <string name="btn_local_file">本地文件</string>
+    <string name="btn_scan_Qrcode">扫码</string>
+    <string name="btn_click_play">开始播放</string>
+
+    <string name="btn_start">开始</string>
+    <string name="btn_pause">暂停</string>
+    <string name="btn_resume">继续</string>
+    <string name="btn_stop">停止</string>
+
+    <string name="douyin_video_play">抖音视频（仅做测试之用）:</string>
+    <string name="douyin_video_list">获取播放列表</string>
+
+</resources>
