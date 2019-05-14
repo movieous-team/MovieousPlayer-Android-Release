@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import cn.ezandroid.ezpermission.EZPermission;
 import cn.ezandroid.ezpermission.Permission;
+import video.movieous.droid.player.MovieousPlayer;
 import video.movieous.droid.player.MovieousPlayerEnv;
+import video.movieous.droid.player.strategy.ULoadControl;
 import video.movieous.droid.player.util.ULog;
 
 public class MyApplication extends Application {
@@ -30,6 +32,15 @@ public class MyApplication extends Application {
                 .isSave(true)
                 .setLevel(ULog.I)
                 .initialize();
+        /**
+         * 不需要自定义缓冲设置，可以不调用以下代码
+         * minBufferMs： 最小缓冲时间 默认 15000ms
+         * maxBufferMs： 最大缓冲时间 默认 50000ms
+         * bufferForPlaybackMs：首次缓冲开始播放时间，需要小于最小缓冲时间 默认 2500ms
+         * bufferForPlaybackAfterRebufferMs：再次缓冲开始播放时间，需要小于最小缓冲时间 5000ms
+         */
+        ULoadControl myLoadControl = new ULoadControl(3000, 10000, 1000, 2000);
+        MovieousPlayer.setLoadControl(myLoadControl);
 
         // 申请权限
         EZPermission.permissions(Permission.STORAGE)
