@@ -40,6 +40,8 @@ public class MyApplication extends Application {
          * bufferForPlaybackAfterRebufferMs：再次缓冲开始播放时间，需要小于最小缓冲时间 5000ms
          */
         ULoadControl myLoadControl = new ULoadControl(3000, 10000, 1000, 2000);
+        // 是否播放暂停后自动停止缓冲，默认会继续缓冲到 maxBufferMs 停止
+        myLoadControl.setPauseBufferWithPlay(true);
         MovieousPlayer.setLoadControl(myLoadControl);
 
         // 申请权限

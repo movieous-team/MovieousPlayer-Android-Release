@@ -17,6 +17,9 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.aar'], dir: 'libs')
 
+    // for rtmp
+    api 'net.butterflytv.utils:rtmp-client:3.0.1'
+
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportLibVersion"
     implementation "com.android.support:support-media-compat:$rootProject.ext.supportLibVersion"
