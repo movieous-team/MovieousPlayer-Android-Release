@@ -77,4 +77,5 @@ public class VideoViewActivity extends VideoPlayerBaseActivity implements OnPrep
         Log.i(TAG, "onError: " + e.getMessage());
         return false;
     }
+
 }

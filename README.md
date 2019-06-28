@@ -1,36 +1,36 @@
 # MovieousPlayer-Android
 
-MovieousPlayer-Android is an audio and video player SDK for Android platform. It provides a concise and convenient interface with highly customizable and secondary development to help developers quickly develop player applications on the Android platform.
+MovieousPlayer-Android 是一个适用于 Android 平台的音视频播放器 SDK，支持常见的直播/点播流媒体播放，可高度定制和二次开发，为 Android 开发者提供了简单、快捷的接口，帮助开发者在 Android 平台上快速开发音视频 APP。
 
-*Read this in other languages: [English](README.md), [简体中文](README.zh-cn.md).*
+*其他语言版本: [English](README.en-us.md), [简体中文](README.md).*
 
-## Features
+## 功能
 
-- [x] based on [ExoPlayer](https://github.com/google/ExoPlayer)
+- [x] 基于 [ExoPlayer](https://github.com/google/ExoPlayer)
 - [x] Android Min API 14
-- [x] Support live/vod streaming media playback
-- [x] Common audio and video containers (MP4, M4A, flv, hls, dash Etc.)
-- [x] Multiple-screen preview mode
-- [x] Support hardware decoding
-- [x] Support cache data locally, can be played offline
-- [x] Support first screen open in seconds
-- [x] Support cover setting
-- [x] Support Mainstream chip system architecture
+- [x] 支持直播/点播流媒体播放
+- [x] 支持常见的音视频文件播放
+- [x] 支持多种画面预览模式
+- [x] 支持硬件解码
+- [x] 支持本地缓存，可以离线播放
+- [x] 支持首屏秒开
+- [x] 支持播放封面设置
+- [x] 支持主流芯片体系架构
 
-## SDK Requirements
+## Android 版本要求
 
-Android 4.0 (API 14) or later
+Android 4.0 (API 14) 及其以上
 
-## Instructions
+## 使用方法
 
-The wiki documentation: [MovieousPlayer Development Guide](https://developer.movieous.cn/#/Android_Player) for your reference
+请参考开发文档：[MovieousPlayer 开发指南](https://developer.movieous.cn/#/Android_Player)
 
-## Description
+## 说明
 
-MovieousPlayer is  based on [ExoPlayer](https://github.com/google/ExoPlayer) , Thanks for [ExoPlayer](https://github.com/google/ExoPlayer)
+MovieousPlayer 目前基于 [ExoPlayer](https://github.com/google/ExoPlayer) , 感谢 [ExoPlayer](https://github.com/google/ExoPlayer)
 
-## Feedback and Suggestions
+## 反馈及意见
 
-Please feedback the problem by submitting issues on GitHub's repo if any problems you got, describe it as clearly as possible, It would be nice if an error message or screenshot also came together, and pointed out the type of bug or other issues in Labels.
+当你遇到任何问题时，可以向我们提交 issue 来反馈。
 
-[Submit issue](https://github.com/movieous-team/MovieousPlayer-Android-Release/issues)
+[提交 issue](https://github.com/movieous-team/MovieousPlayer-Android-Release/issues)。
