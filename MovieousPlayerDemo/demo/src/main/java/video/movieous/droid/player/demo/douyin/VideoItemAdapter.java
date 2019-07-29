@@ -20,8 +20,8 @@ public class VideoItemAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private ArrayList<VideoListItem> mVideoItemList;
 
-    public VideoItemAdapter(Context mContext, ArrayList<VideoListItem> videoItemList) {
-        this.mContext = mContext;
+    public VideoItemAdapter(Context context, ArrayList<VideoListItem> videoItemList) {
+        this.mContext = context;
         this.mVideoItemList = videoItemList;
     }
 

@@ -34,7 +34,6 @@ import java.util.ArrayList;
 public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
     private static final String TAG = "DouyinVideoPlayActivity";
 
-    private Context mContext;
     private RecyclerView mVideoListRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private PagerSnapHelper mPagerSnapHelper;
@@ -95,9 +94,10 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         VideoItemAdapter.VideoViewHolder vh = (VideoItemAdapter.VideoViewHolder) mVideoListRecyclerView.getChildViewHolder(mPlayView);
         vh.videoView.release();
+        mVideoListRecyclerView.setAdapter(null);
+        super.onDestroy();
     }
 
     private static X509TrustManager getTrustManager() {
@@ -187,14 +187,13 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
     }
 
     private void initView() {
-        mContext = DouyinVideoPlayActivity.this;
         setContentView(R.layout.activity_douyin_video_play);
         mVideoListRecyclerView = findViewById(R.id.rv_video_detail);
-        mLinearLayoutManager = new LinearLayoutManager(mContext);
+        mLinearLayoutManager = new LinearLayoutManager(this);
         mVideoListRecyclerView.setLayoutManager(mLinearLayoutManager);
         mPagerSnapHelper = new PagerSnapHelper();
         mPagerSnapHelper.attachToRecyclerView(mVideoListRecyclerView);
-        mVideoListRecyclerView.setAdapter(new VideoItemAdapter(mContext, mVideoList));
+        mVideoListRecyclerView.setAdapter(new VideoItemAdapter(this, mVideoList));
         mVideoListRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

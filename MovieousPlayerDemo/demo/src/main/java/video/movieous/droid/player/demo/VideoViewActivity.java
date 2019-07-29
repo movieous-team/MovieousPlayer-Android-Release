@@ -42,8 +42,8 @@ public class VideoViewActivity extends VideoPlayerBaseActivity implements OnPrep
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mVideoView.release();
+        super.onDestroy();
     }
 
     private void setupVideoView() {
