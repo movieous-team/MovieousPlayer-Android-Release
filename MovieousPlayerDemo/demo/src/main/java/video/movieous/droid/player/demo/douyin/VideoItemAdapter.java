@@ -14,11 +14,12 @@ import video.movieous.droid.player.demo.R;
 import video.movieous.droid.player.ui.widget.VideoView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VideoItemAdapter extends RecyclerView.Adapter {
-
     private Context mContext;
-    private ArrayList<VideoListItem> mVideoItemList;
+    private List<VideoListItem> mVideoItemList;
+    private List<VideoViewHolder> mHolderList = new ArrayList<>();
 
     public VideoItemAdapter(Context context, ArrayList<VideoListItem> videoItemList) {
         this.mContext = context;
@@ -36,6 +37,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter {
         VideoViewHolder holder = (VideoViewHolder) viewHolder;
         int index = mVideoItemList.size() - 1 - position;
         VideoListItem videoItem = mVideoItemList.get(index);
+        mHolderList.add(holder);
 
         if (videoItem.avatarRes > 0) {
             Glide.with(mContext).load(videoItem.avatarRes).into(holder.iv_avatar);
@@ -60,6 +62,13 @@ public class VideoItemAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return mVideoItemList != null ? mVideoItemList.size() : 0;
+    }
+
+    public void release() {
+        for (VideoViewHolder holder : mHolderList) {
+            holder.videoView.release();
+        }
+        mHolderList.clear();
     }
 
     public class VideoViewHolder extends RecyclerView.ViewHolder {

@@ -1,6 +1,5 @@
 package video.movieous.droid.player.demo.douyin;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import com.bumptech.glide.Glide;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -35,6 +33,7 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
     private static final String TAG = "DouyinVideoPlayActivity";
 
     private RecyclerView mVideoListRecyclerView;
+    private VideoItemAdapter mVideoItemAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private PagerSnapHelper mPagerSnapHelper;
     private static ArrayList<VideoListItem> mVideoList;
@@ -94,8 +93,7 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
 
     @Override
     protected void onDestroy() {
-        VideoItemAdapter.VideoViewHolder vh = (VideoItemAdapter.VideoViewHolder) mVideoListRecyclerView.getChildViewHolder(mPlayView);
-        vh.videoView.release();
+        mVideoItemAdapter.release();
         mVideoListRecyclerView.setAdapter(null);
         super.onDestroy();
     }
@@ -193,7 +191,8 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
         mVideoListRecyclerView.setLayoutManager(mLinearLayoutManager);
         mPagerSnapHelper = new PagerSnapHelper();
         mPagerSnapHelper.attachToRecyclerView(mVideoListRecyclerView);
-        mVideoListRecyclerView.setAdapter(new VideoItemAdapter(this, mVideoList));
+        mVideoItemAdapter = new VideoItemAdapter(this, mVideoList);
+        mVideoListRecyclerView.setAdapter(mVideoItemAdapter);
         mVideoListRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
