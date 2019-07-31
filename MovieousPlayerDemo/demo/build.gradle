@@ -25,8 +25,7 @@ dependencies {
     implementation "com.android.support:support-media-compat:$rootProject.ext.supportLibVersion"
 
     // Memory Leak diagnostics
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-1'
 
     // zxing
     implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
@@ -54,8 +53,8 @@ android {
         applicationId "video.movieous.droid.player.demo"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 205
-        versionName "2.0.5"
+        versionCode 206
+        versionName "2.0.6"
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
     }
 

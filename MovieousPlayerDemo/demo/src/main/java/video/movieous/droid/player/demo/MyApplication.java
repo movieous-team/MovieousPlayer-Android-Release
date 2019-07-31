@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import cn.ezandroid.ezpermission.EZPermission;
 import cn.ezandroid.ezpermission.Permission;
-import com.squareup.leakcanary.LeakCanary;
 import video.movieous.droid.player.MovieousPlayer;
 import video.movieous.droid.player.MovieousPlayerEnv;
 import video.movieous.droid.player.strategy.ULoadControl;
@@ -23,21 +22,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // init LeakCanary
-        initLeakCanary();
         // init MovieousPlayerEnv
         initMovieousPlayerEnv();
         // 申请权限
         EZPermission.permissions(Permission.STORAGE).apply(this, null);
-    }
-
-    private void initLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
     }
 
     private void initMovieousPlayerEnv() {
