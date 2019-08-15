@@ -53,8 +53,8 @@ android {
         applicationId "video.movieous.droid.player.demo"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 207
-        versionName "2.0.7"
+        versionCode 208
+        versionName "2.0.8"
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
     }
 
