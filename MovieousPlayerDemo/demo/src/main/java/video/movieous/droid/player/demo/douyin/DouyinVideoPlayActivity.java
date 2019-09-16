@@ -6,30 +6,38 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
+import com.google.android.exoplayer2.analytics.AnalyticsListener;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import video.movieous.droid.player.demo.R;
-import video.movieous.droid.player.demo.VideoPlayerBaseActivity;
-import video.movieous.droid.player.demo.utils.SSLSocketFactoryCompat;
 
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.security.KeyStore;
 import java.util.ArrayList;
 
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import video.movieous.droid.player.demo.R;
+import video.movieous.droid.player.demo.VideoPlayerBaseActivity;
+import video.movieous.droid.player.demo.utils.SSLSocketFactoryCompat;
+import video.movieous.droid.player.listener.OnCompletionListener;
+import video.movieous.droid.player.listener.OnPreparedListener;
+
 /**
  * 仿抖音上下滑动播放
  */
-public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
+public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity implements OnPreparedListener, OnCompletionListener, AnalyticsListener {
     private static final String TAG = "DouyinVideoPlayActivity";
 
     private RecyclerView mVideoListRecyclerView;
@@ -41,7 +49,7 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
     private int mPlayPosition;
     private View mPlayView;
 
-    private static String[] VIDEO_SOURCE = new String[]{"dou-yin", "kuai-shou", "huo-shan", "mei-pai"};
+    private static String[] VIDEO_SOURCE = new String[]{"kuai-shou", "mei-pai", "huo-shan", "dou-yin",};
     private static String[] TIME_RANGE = new String[]{"week", "month"};
     private static int MAX_PAGE = 5;
     private static int SOURCE_INDEX;
@@ -66,11 +74,10 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
         mPlayPosition = position;
         final VideoItemAdapter.VideoViewHolder vh = (VideoItemAdapter.VideoViewHolder) mVideoListRecyclerView.getChildViewHolder(mPlayView);
         Log.i(TAG, "start play, url: " + vh.videoView.getVideoUri().toString());
-
         if (vh.videoView.getTag() == null || !vh.videoView.getTag().equals(vh.videoView.getVideoUri().toString())) {
             vh.videoView.start();
-        } else {
-            vh.videoView.restart();
+        } else if (!vh.videoView.restart()) {
+            vh.videoView.start();
         }
     }
 
@@ -192,6 +199,7 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
         mPagerSnapHelper = new PagerSnapHelper();
         mPagerSnapHelper.attachToRecyclerView(mVideoListRecyclerView);
         mVideoItemAdapter = new VideoItemAdapter(this, mVideoList);
+        mVideoItemAdapter.setListener(this, this, this);
         mVideoListRecyclerView.setAdapter(mVideoItemAdapter);
         mVideoListRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -208,6 +216,21 @@ public class DouyinVideoPlayActivity extends VideoPlayerBaseActivity {
                 mVideoListRecyclerView.post(() -> playVideo());
             });
         }
+    }
+
+    @Override
+    public void onPrepared() {
+        Log.i(TAG, "onPrepared");
+    }
+
+    @Override
+    public void onCompletion() {
+        Log.i(TAG, "onCompletion");
+    }
+
+    @Override
+    public void onRenderedFirstFrame(EventTime eventTime, @Nullable Surface surface) {
+        Log.i(TAG, "onRenderedFirstFrame");
     }
 
 }

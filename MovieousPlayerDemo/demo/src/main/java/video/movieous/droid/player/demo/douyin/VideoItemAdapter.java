@@ -8,22 +8,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.Player;
-import video.movieous.droid.player.demo.R;
-import video.movieous.droid.player.ui.widget.VideoView;
+import com.google.android.exoplayer2.analytics.AnalyticsListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import video.movieous.droid.player.demo.R;
+import video.movieous.droid.player.listener.OnCompletionListener;
+import video.movieous.droid.player.listener.OnPreparedListener;
+import video.movieous.droid.player.ui.widget.VideoView;
 
 public class VideoItemAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private List<VideoListItem> mVideoItemList;
     private List<VideoViewHolder> mHolderList = new ArrayList<>();
 
+    private OnPreparedListener mOnPreparedListener;
+    private OnCompletionListener mOnCompletionListener;
+    private AnalyticsListener mAnalyticsListener;
+
     public VideoItemAdapter(Context context, ArrayList<VideoListItem> videoItemList) {
         this.mContext = context;
         this.mVideoItemList = videoItemList;
+    }
+
+    public void setListener(OnPreparedListener onPreparedListener, OnCompletionListener onCompletionListener, AnalyticsListener analyticsListener) {
+        mOnPreparedListener = onPreparedListener;
+        mOnCompletionListener = onCompletionListener;
+        mAnalyticsListener = analyticsListener;
     }
 
     @NonNull
@@ -48,7 +63,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter {
         // 视频封面
         if (!TextUtils.isEmpty(videoItem.coverUrl)) {
             Glide.with(mContext.getApplicationContext())
-                    .load(videoItem.coverUrl)
+                    .load(videoItem.coverUrl.endsWith(".kpg") ? "" : videoItem.coverUrl)
                     .into(holder.videoView.getPreviewImageView());
         }
 
@@ -81,6 +96,9 @@ public class VideoItemAdapter extends RecyclerView.Adapter {
             super(itemView);
 
             videoView = itemView.findViewById(R.id.video_view);
+            videoView.setOnPreparedListener(mOnPreparedListener);
+            videoView.setOnCompletionListener(mOnCompletionListener);
+            videoView.setAnalyticsListener(mAnalyticsListener);
             iv_avatar = itemView.findViewById(R.id.iv_avatar);
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_content = itemView.findViewById(R.id.tv_content);
