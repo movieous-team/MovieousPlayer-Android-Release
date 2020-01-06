@@ -1,7 +1,7 @@
 package video.movieous.droid.player.demo;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.Surface;
 import com.google.android.exoplayer2.Player;
